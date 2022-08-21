@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">VideoPlayer</string>
     <string name="thumbnail_image">Thumbnail image</string>
+    <string name="home_screen_title">Home</string>
+    <string name="top_app_bar_home_icon_descriptions">Top App bar home Icon</string>
 </resources>

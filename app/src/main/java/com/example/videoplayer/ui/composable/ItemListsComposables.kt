@@ -1,8 +1,11 @@
 package com.example.videoplayer.ui.composable
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -15,11 +18,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import androidx.navigation.NavHostController
 import com.example.videoplayer.R
 import com.example.videoplayer.model.Video
 
 @Composable
-fun ThumbNail(video: Video, name: String, clickAction: () -> Unit) {
+fun ThumbNail(imageUrl:String, name: String, clickAction: () -> Unit) {
     Card(
         modifier = Modifier
             .wrapContentWidth()
@@ -37,18 +41,18 @@ fun ThumbNail(video: Video, name: String, clickAction: () -> Unit) {
                 .padding(bottom = 8.dp)
         ) {
             val (thumbnail, title) = createRefs()
-            CustomImage(url = video.uri.toString(),
+            CustomImage(url = imageUrl,
                 description = stringResource(id = R.string.thumbnail_image),
                 modifier = Modifier
-                .size(80.dp)
-                .clip(RoundedCornerShape(16.dp))
-                .constrainAs(thumbnail) {
-                    top.linkTo(parent.top, margin = 16.dp)
-                    start.linkTo(parent.start, margin = 16.dp)
-                    width = Dimension.wrapContent
-                    height = Dimension.fillToConstraints
-                })
-            CustomizedText(text = video.title,
+                    .size(80.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .constrainAs(thumbnail) {
+                        top.linkTo(parent.top, margin = 16.dp)
+                        start.linkTo(parent.start, margin = 16.dp)
+                        width = Dimension.wrapContent
+                        height = Dimension.fillToConstraints
+                    })
+            CustomizedText(text = name,
                 modifier = Modifier.constrainAs(title) {
                 top.linkTo(thumbnail.bottom, margin = 8.dp)
                 start.linkTo(thumbnail.start)
@@ -61,7 +65,43 @@ fun ThumbNail(video: Video, name: String, clickAction: () -> Unit) {
     }
 
 }
+@Composable
+fun ThumbNailList(category:String,thumbNailImages:List<Video>,
+                  navHostController: NavHostController?){
+    ConstraintLayout(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(bottom = 8.dp, top = 8.dp)
+    ){
+        val (videoCategory, lazyRowRef) = createRefs()
+        CustomizedText(text = category,
+            modifier = Modifier.constrainAs(videoCategory) {
+                top.linkTo(parent.top, margin = 8.dp)
+                start.linkTo(parent.start)
+                width = Dimension.wrapContent
+                height = Dimension.wrapContent
+            }
+        )
+        LazyRow(modifier = Modifier
+            .constrainAs(lazyRowRef) {
+                top.linkTo(videoCategory.bottom, margin = 8.dp)
+                start.linkTo(videoCategory.start)
+                end.linkTo(parent.end, margin = 16.dp)
+                width = Dimension.fillToConstraints
+                height = Dimension.wrapContent
+            }
+            .background(Color.White)
+        ){
+            items(thumbNailImages){ imageurl ->
+                ThumbNail(imageUrl = imageurl.uri, name =imageurl.title ) {
 
+                }
+
+            }
+        }
+    }
+
+}
 
 val Shapes = Shapes(
     small = RoundedCornerShape(4.dp),
