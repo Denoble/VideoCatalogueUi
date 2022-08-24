@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../../../layout/compose-model-1660849076483.xml" value="0.13240740740740742" />
         <entry key="app/src/main/res/drawable/ic_baseline_broken_image_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/loading_img.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/network_error.xml" value="0.1" />
         <entry key="app/src/main/res/layout/custom_player.xml" value="0.1046875" />
       </map>

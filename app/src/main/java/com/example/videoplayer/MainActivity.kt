@@ -1,10 +1,10 @@
 package com.example.videoplayer
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.media.session.MediaSessionCompat
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,10 +23,11 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.videoplayer.ui.composable.HomeScreen
 import com.example.videoplayer.ui.theme.VideoPlayerTheme
+import com.example.videoplayer.viewModel.VideoViewModel
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.ui.PlayerControlView
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.RawResourceDataSource
@@ -40,8 +41,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             VideoPlayerTheme {
                 val navController = rememberNavController()
+                val viewModel: VideoViewModel by viewModels()
+                val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
 
-                NavHost(navController = navController, startDestination = "main") {
+                /*NavHost(navController = navController, startDestination = "main") {
                     composable("main") {
                         MainPage(navController = navController)
                     }
@@ -55,7 +58,13 @@ class MainActivity : ComponentActivity() {
                             CustomizedVideoView()
                         }
                     }
-                }
+
+                }*/
+                HomeScreen(
+                    list = viewModel.streamCategoryList.value,
+                    scaffoldState = scaffoldState,
+                    navHostController = navController
+                )
             }
         }
     }
