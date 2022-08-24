@@ -12,14 +12,14 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
 class VideoViewModel() : ViewModel() {
     val streamCategoryList: MutableState<List<VideoCategory>> =
-        mutableStateOf(ArrayList<VideoCategory>())
+        mutableStateOf(ArrayList())
+
     init {
         updateStreamCategoryList()
     }
@@ -28,15 +28,18 @@ class VideoViewModel() : ViewModel() {
         viewModelScope.launch {
             val steamCategoryListUpdateJob: Deferred<Flow<List<VideoCategory>>> =
                 async(Dispatchers.Default) {
-                        prepareStreamCategories()
+                    prepareStreamCategories()
                 }
             try {
                 val streamCategoryListValue = steamCategoryListUpdateJob.await()
-                 streamCategoryListValue.collect{
-                     streamCategoryList.value =it
+                streamCategoryListValue.collect {
+                    streamCategoryList.value = it
                 }
-            }catch (e:Exception){
-                Log.e(VideoViewModel::class.simpleName+"streamCategoryUpdate", e.stackTraceToString())
+            } catch (e: Exception) {
+                Log.e(
+                    VideoViewModel::class.simpleName + "streamCategoryUpdate",
+                    e.stackTraceToString()
+                )
             }
 
 
@@ -47,10 +50,10 @@ class VideoViewModel() : ViewModel() {
         val tempStreamCategoryList = ArrayList<VideoCategory>()
         val category = "Category"
         return flow {
-            for (i in 0 until 10) {
+            for (i in 0 until 20) {
                 val tempList = ArrayList<Video>()
                 val tempCategory = category + "  " + i
-                for (j in 0 until 20) {
+                for (j in 0 until 40) {
                     val tempVideo = Video(Uri.parse("R.drawable.img").toString(), "Stream $j")
                     tempList.add(tempVideo)
                 }
