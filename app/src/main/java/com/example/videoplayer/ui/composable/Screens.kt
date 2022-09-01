@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
@@ -29,35 +30,22 @@ import com.example.videoplayer.model.VideoCategory
 fun HomeScreen(
     list: List<VideoCategory>,
     scaffoldState: ScaffoldState,
-    navHostController: NavHostController?
+    navHostController: NavHostController
 ) {
     Scaffold(modifier = Modifier.fillMaxSize(),
         scaffoldState = scaffoldState,
         topBar = {
             CustomAppBar(
-                title = stringResource(id = R.string.home_screen_title),
-                icon = Icons.Default.Home, {})
+                title = stringResource(id = R.string.stream_category),
+                icon = Icons.Default.ArrowBack, {
+                    navHostController.navigateUp()
+                })
         },
         content = {
             it.calculateBottomPadding()
             VideThumbNaillist(categoryList = list, navHostController = navHostController)
         },
         bottomBar = { BottomNavigationBar() })
-}
-
-@Composable
-fun CustomAppBar(title: String, icon: ImageVector, iconClickAction: () -> Unit) {
-    TopAppBar(
-        title = { Text(text = title) },
-        backgroundColor = MaterialTheme.colors.primary,
-        navigationIcon = {
-            Icon(
-                icon,
-                contentDescription = stringResource(id = R.string.top_app_bar_home_icon_descriptions),
-                modifier = Modifier.clickable(onClick = { iconClickAction.invoke() })
-            )
-        }
-    )
 }
 
 @Composable

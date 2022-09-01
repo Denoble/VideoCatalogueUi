@@ -20,6 +20,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
 import com.example.videoplayer.R
+import com.example.videoplayer.model.Routes
 import com.example.videoplayer.model.Video
 
 @Composable
@@ -28,7 +29,10 @@ fun ThumbNail(imageUrl:String, name: String, clickAction: () -> Unit) {
         modifier = Modifier
             .wrapContentWidth()
             .fillMaxHeight()
-            .padding(bottom = 48.dp)
+            .padding(top = 16.dp,
+                start = 16.dp,
+                end = 16.dp,
+                bottom = 16.dp)
             .clickable(onClick = { clickAction.invoke() }),
         elevation = 8.dp,
         shape = Shapes.myshape.medium,
@@ -90,11 +94,14 @@ fun ThumbNailList(category:String,thumbNailImages:List<Video>,
                 width = Dimension.fillToConstraints
                 height = Dimension.wrapContent
             }
-            .background(Color.White)
+            .background(Color.White),
         ){
             items(thumbNailImages){ imageurl ->
                 ThumbNail(imageUrl = imageurl.uri, name =imageurl.title ) {
-
+                    navHostController?.navigate(Routes.StreamDetailsView.route +
+                            "/${imageurl.title}") {
+                        launchSingleTop = true
+                    }
                 }
 
             }

@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
                 val viewModel: VideoViewModel by viewModels()
                 val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
 
-                /*NavHost(navController = navController, startDestination = "main") {
+                NavHost(navController = navController, startDestination = "main") {
                     composable("main") {
                         MainPage(navController = navController)
                     }
@@ -58,13 +58,14 @@ class MainActivity : ComponentActivity() {
                             CustomizedVideoView()
                         }
                     }
-
-                }*/
-                HomeScreen(
-                    list = viewModel.streamCategoryList.value,
-                    scaffoldState = scaffoldState,
-                    navHostController = navController
-                )
+                    composable("StreamingListView") {
+                        HomeScreen(
+                            list = viewModel.streamCategoryList.value,
+                            scaffoldState = scaffoldState,
+                            navHostController = navController
+                        )
+                    }
+                }
             }
         }
     }
@@ -129,6 +130,9 @@ fun MainPage(navController: NavController) {
 
         CustomButton(text = "CustomizedVideoView") {
             navController.navigate("CustomizedVideoView")
+        }
+        CustomButton(text = "StreamingListView") {
+            navController.navigate("StreamingListView")
         }
     }
 }

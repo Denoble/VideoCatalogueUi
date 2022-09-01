@@ -8,7 +8,7 @@ import com.example.videoplayer.model.Routes
 @Composable
 fun AppNavigationGraph(){
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Routes.Home.route){
+    NavHost(navController = navController, startDestination = Routes.Main.route){
 
     }
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.videoplayer.model.Video
 import com.example.videoplayer.model.VideoCategory
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -16,6 +17,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
+@HiltViewModel
 class VideoViewModel() : ViewModel() {
     val streamCategoryList: MutableState<List<VideoCategory>> =
         mutableStateOf(ArrayList())
@@ -41,8 +43,6 @@ class VideoViewModel() : ViewModel() {
                     e.stackTraceToString()
                 )
             }
-
-
         }
     }
 
