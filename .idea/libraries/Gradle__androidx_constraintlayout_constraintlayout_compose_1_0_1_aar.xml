@@ -1,12 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.constraintlayout:constraintlayout-compose:1.0.1@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/28a82398282ee29bd8a4d1d9c899dfcb/transformed/jetified-constraintlayout-compose-1.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a8a2310d02bf91c9c95ed75f8bbe0233/transformed/jetified-constraintlayout-compose-1.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/eae30358f850cfce3f2800af3250ff2d/transformed/jetified-constraintlayout-compose-1.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0fae8ca6924d4fca6c5b95a1af9fa021/transformed/jetified-constraintlayout-compose-1.0.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/0fae8ca6924d4fca6c5b95a1af9fa021/transformed/jetified-constraintlayout-compose-1.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/0fae8ca6924d4fca6c5b95a1af9fa021/transformed/jetified-constraintlayout-compose-1.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d6b57f7c507a2dcf5716ddda49282366/transformed/jetified-constraintlayout-compose-1.0.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/d6b57f7c507a2dcf5716ddda49282366/transformed/jetified-constraintlayout-compose-1.0.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
